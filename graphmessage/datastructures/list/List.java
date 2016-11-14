@@ -160,6 +160,24 @@ public class List <T> {
 	   }
 	   return exist;
    }
+   
+   /**return node in the specified position,
+    * the position location counter starts from 0
+    * @param position
+    * @return
+    */
+   public Node<T> getNode(int position) {
+	   
+	   Node<T> nodePointer = null;
+	   if(position < this.lenght) {
+		   nodePointer = this.head;
+		   for (int index = 0; index < position; index++) {
+			   nodePointer = nodePointer.getNextNode();
+		   }
+	   }	   
+	   return nodePointer;
+			   
+   }
 
    public void setHead(Node<T> head) {
       this.head = head;
