@@ -2,6 +2,9 @@ package graphmessage.datastructures.graph;
 
 import graphmessage.datastructures.list.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Graph {
 	
 	private List<Vertex> vertexList;
