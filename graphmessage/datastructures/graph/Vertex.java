@@ -1,22 +1,21 @@
 package graphmessage.datastructures.graph;
 
 public class Vertex {
-    
-	public String label;
-    
+	
+    public Long id;
     public boolean wasVisited;
 
-    public Vertex(String label){
-        this.label = label;
-        this.wasVisited = true;
+    public Vertex(Long id){
+        this.id = id;
+        wasVisited = true;
     }
 
-	public String getLabel() {
-		return label;
+	public Long getId() {
+		return id;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public boolean isWasVisited() {
@@ -26,5 +25,5 @@ public class Vertex {
 	public void setWasVisited(boolean wasVisited) {
 		this.wasVisited = wasVisited;
 	}
-       
+    
 }
