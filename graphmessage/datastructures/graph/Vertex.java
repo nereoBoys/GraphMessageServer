@@ -1,30 +1,24 @@
 package graphmessage.datastructures.graph;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Vertex {
     
-	public String label;
+	private Long data;
     
-    public boolean wasVisited;
+    public Vertex() {}
 
-    public Vertex(String label){
-        this.label = label;
-        this.wasVisited = true;
+    public Vertex(Long data){
+        this.data = data;
     }
 
-	public String getLabel() {
-		return label;
+	public Long getData() {
+		return data;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setData(Long data) {
+		this.data = data;
 	}
 
-	public boolean isWasVisited() {
-		return wasVisited;
-	}
-
-	public void setWasVisited(boolean wasVisited) {
-		this.wasVisited = wasVisited;
-	}
-       
 }
