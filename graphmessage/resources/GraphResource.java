@@ -14,7 +14,7 @@ public class GraphResource {
 	
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public void addReportRequest(@Suspended AsyncResponse asyncResponse) throws InterruptedException {
+    public void addGraphRequest(@Suspended AsyncResponse asyncResponse) throws InterruptedException {
         LogicContainer.getLogic().enqueueGraphRequest(asyncResponse);
     }
 

@@ -25,11 +25,11 @@ public class Logic implements Constants {
      * envia un mensaje para establecer la conexion
      * 
      * @param user
-     * @return
+     * @return Response 
      */
-	public Response checkUserBackground(Long userId) {
+	public Response checkUserBackground(User user) {
 		
-		if(isBanned(userId)) {
+		if(isBanned(user.getMacAddress())) {
 			return new Response(CONNECTION_REFUSED_USER_BANNED);
 		} else {
 			return new Response(CONNECTION_STABLISHED);
@@ -37,14 +37,21 @@ public class Logic implements Constants {
 
 	}
 	
-	private boolean isBanned(Long userId) {
+	private boolean isBanned(String userMacAddress) {
 		BannedUserRegistry bannedUserRegistry = databaseManager.readBannedUserRegistry();
-		return bannedUserRegistry.getBannedUsers().contains(userId);
+		return bannedUserRegistry.getBannedUsers().contains(userMacAddress);
 	}
 	
+	/** Metodo utilizado para registrar usuarios en la base 
+	 * de datos y en el grafo
+	 * 
+	 * @param user
+	 */
 	public void registerUser(User user) {
 		addUserToGraph(user);
+		System.out.print("user added to graph\n");//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<PRINT
 		addUserToRegistry(user);
+		System.out.print("user added to registry\n");//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<PRINT
 	}
 	
 	private void addUserToGraph(User user) {
@@ -67,6 +74,12 @@ public class Logic implements Constants {
     	}
     }
     
+    /** Motodo utilizado para insertar en una cola los request
+     * de los usuarios para ser notificados cuando se realiza algun 
+     * cambio en el grafo
+     * 
+     * @param asyncResponse
+     */
 	public void enqueueGraphRequest(AsyncResponse asyncResponse) {
 		reportRequestQueue.enqueque(asyncResponse);
 	}
@@ -102,10 +115,10 @@ public class Logic implements Constants {
 	private boolean analizeInapropiateContent(Message message) {
 		return false; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,
 	}
-
-	public void banUser(Long user) {
+	
+	private void banUser(String userMacAddress) {
 		BannedUserRegistry bannedUserRegistry = databaseManager.readBannedUserRegistry();
-		bannedUserRegistry.getBannedUsers().add(user);
+		bannedUserRegistry.getBannedUsers().add(userMacAddress);
 		databaseManager.writeBannedUserRegistry(bannedUserRegistry);
 	}
 	
@@ -114,8 +127,6 @@ public class Logic implements Constants {
 		textMessageRegistry.getTextMessages().add(new TextMessage(message));
 		databaseManager.writeTextMessageRegistry(textMessageRegistry);
 	}
-	
-	
 	
 	private void addToMessageRegistry(Message message) {
 		MessageRegistry messageRegistry = databaseManager.readMessageRegistry();

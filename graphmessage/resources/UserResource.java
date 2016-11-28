@@ -15,9 +15,10 @@ public class UserResource {
 
 	@POST
 	@Path("check")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response userLogin(Long userId) { //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<posible error
-		return LogicContainer.getLogic().checkUserBackground(userId);	
+	public Response userCheck(User user) { 
+		return LogicContainer.getLogic().checkUserBackground(user);	
 	}
 	
 	@POST

@@ -7,29 +7,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Message {
 	
-	private Long sender;
-	private Long reciever;
+	private String sender;
+	private String reciever;
 	private SimpleDateFormat time; 
 	//private Graph path;
 	private String content;
 	private String type;
 	
-	public Long getSender() {
+	public String getSender() {
 		return sender;
 	}
-	
-	public void setSender(Long sender) {
+
+	public void setSender(String sender) {
 		this.sender = sender;
 	}
-	
-	public Long getReciever() {
+
+	public String getReciever() {
 		return reciever;
 	}
-	
-	public void setReciever(Long reciever) {
+
+	public void setReciever(String reciever) {
 		this.reciever = reciever;
 	}
-	
+
 	public SimpleDateFormat getTime() {
 		return time;
 	}

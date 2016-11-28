@@ -1,2 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<userRegistry/>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<userRegistry>
+    <users>
+        <email>sinfuente@gmail.com</email>
+        <macAddress>a5s6d5c8</macAddress>
+        <name>rafael</name>
+    </users>
+    <users>
+        <email>sanhez@gmail.com</email>
+        <macAddress>a5sdd55d8</macAddress>
+        <name>emilio</name>
+    </users>
+</userRegistry>

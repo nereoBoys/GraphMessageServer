@@ -7,7 +7,7 @@ public class User {
 
 	private String name;
 	private String email;
-	private Long address;
+	private String macAddress;
 	
 	public String getName() {
 		return name;
@@ -24,13 +24,13 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public Long getAddress() {
-		return address;
+
+	public String getMacAddress() {
+		return macAddress;
 	}
-	
-	public void setAddress(Long address) {
-		this.address = address;
+
+	public void setMacAddress(String macAddress) {
+		this.macAddress = macAddress;
 	}
-	
+		
 }
