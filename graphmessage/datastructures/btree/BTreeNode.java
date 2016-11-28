@@ -2,13 +2,16 @@ package graphmessage.datastructures.btree;
 
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import graphmessage.constants.Constants;
 
-/**
+/** Clase que descri el nodo de un arbol b
  * @author jeanpaul
  *
  * @param <T>
  */
+@XmlRootElement
 public class BTreeNode<T extends Comparable<T>> implements Constants {
 	
 	private int order = BTREE_DEFAULT_ORDER_SIZE;
@@ -18,15 +21,26 @@ public class BTreeNode<T extends Comparable<T>> implements Constants {
 	private ArrayList<T> keys = new ArrayList<>(5);
 	private ArrayList<BTreeNode<T>> references = new ArrayList<>(5);
 	private BTreeNode<T> parent = null;
-
-	public BTreeNode() {
-		
-	}
+	
+	/**constructor utilizado por jaxb
+	 * 
+	 */
+	public BTreeNode() {}
+	
+	/** contructor utilizado para crear una intancia de nodo que contenga
+	 * el dato especificado como parametro 
+	 * 
+	 * @param key
+	 */
 	public BTreeNode(T key) {
 		keys.add(key);
 		incrementKeyTally();
 	}
 	
+	/**metodo utilizado para añadir un elemento al nodo
+	 * 
+	 * @param key
+	 */
 	public void addKey(T key) {
 		if(keys.isEmpty() || (keys.get(keys.size()-1).compareTo(key) < 0)) {
 			keys.add(key);
@@ -42,6 +56,10 @@ public class BTreeNode<T extends Comparable<T>> implements Constants {
 		incrementKeyTally();
 	}
 	
+	/** Metodo utilizado para añadir un hijo al nodo
+	 * 
+	 * @param child
+	 */
 	public void addReference(BTreeNode<T> child) {
 
 		if(references.isEmpty() || 

@@ -1,29 +1,24 @@
 package graphmessage.datastructures.graph;
 
-public class Vertex {
-	
-    public Long id;
-    public boolean wasVisited;
+import javax.xml.bind.annotation.XmlRootElement;
 
-    public Vertex(Long id){
-        this.id = id;
-        wasVisited = true;
+@XmlRootElement
+public class Vertex {
+    
+	private Long data;
+    
+    public Vertex() {}
+
+    public Vertex(Long data){
+        this.data = data;
     }
 
-	public Long getId() {
-		return id;
+	public Long getData() {
+		return data;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setData(Long data) {
+		this.data = data;
 	}
 
-	public boolean isWasVisited() {
-		return wasVisited;
-	}
-
-	public void setWasVisited(boolean wasVisited) {
-		this.wasVisited = wasVisited;
-	}
-    
 }
