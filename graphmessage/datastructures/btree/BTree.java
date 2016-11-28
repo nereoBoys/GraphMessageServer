@@ -1,14 +1,30 @@
 package graphmessage.datastructures.btree;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+/** Clase que describe un arbol b y su comportamiento
+ * 
+ * @author jeanpaul
+ *
+ * @param <T>
+ */
+@XmlRootElement
 public class BTree<T extends Comparable<T>> {
 
 	private BTreeNode<T> root;
 
+	/** Medoto utilizado para realizar busquedas de un elemento 
+	 * en el arbol b, retorna el nodo en el que se encuentra el 
+	 * elemento de no ser asi se retorna nulo
+	 * 
+	 * @param key
+	 * @return BTreeeNode<T>
+	 */
 	public BTreeNode<T> search(T key) {
 		return search(key, root);
 	}
 
-	public BTreeNode<T> search(T key, BTreeNode<T> node) {
+	private BTreeNode<T> search(T key, BTreeNode<T> node) {
 		if (node != null) {
 			int i = 1;
 			for (; i <= node.getKeyTally() && (node.getKeys().get(i - 1).compareTo(key) < 0); i++) {
@@ -22,6 +38,10 @@ public class BTree<T extends Comparable<T>> {
 			return null;
 	}
 
+	/** metodo utilizado para realizar inserciones en el arbol
+	 * 
+	 * @param key
+	 */
 	public void insert(T key) {
 
 		if (root == null) {
@@ -103,7 +123,9 @@ public class BTree<T extends Comparable<T>> {
 		}
 	}
 
-	
+	/** Metodo utilizado para imprmir el arbol en consola
+	 * 
+	 */
 	public void print() {
 		print(root);
 	}
@@ -114,10 +136,10 @@ public class BTree<T extends Comparable<T>> {
 		}
 
 		if (!node.isLeaf()){
-			for (int j = 0; j < node.getReferences().size() ; j++) { // to print out tree in
-				if (node.getReferences().get(j) != null) { // going from left most
-					System.out.println(); // child to right most
-					print(node.getReferences().get(j)); // child.
+			for (int j = 0; j < node.getReferences().size() ; j++) {
+				if (node.getReferences().get(j) != null) { 
+					System.out.println(); 
+					print(node.getReferences().get(j)); 
 				}
 			}
 		}
