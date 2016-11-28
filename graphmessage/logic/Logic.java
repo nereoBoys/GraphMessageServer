@@ -83,7 +83,12 @@ public class Logic implements Constants {
 	public void enqueueGraphRequest(AsyncResponse asyncResponse) {
 		reportRequestQueue.enqueque(asyncResponse);
 	}
-
+	
+	/** Metodo utilizado para analizar y registrar mensajes en 
+	 * la base de datos
+	 * 
+	 * @param message
+	 */
 	public void registerMessage(Message message) {
 		if(message.getType().equals("text")) {
 			if(analizeSpam(message) || analizeInapropiateContent(message)) {
@@ -103,17 +108,31 @@ public class Logic implements Constants {
 	private TextMessage getLastTextMessage(Message message) {
 		TextMessage textMessage = null;
 		TextMessageRegistry textMessageRegistry = databaseManager.readTextMessageRegistry();
-		for(TextMessage registeredTextMessage:textMessageRegistry.getTextMessages()) {
-			if(registeredTextMessage.getMessage().getSender() == message.getSender() &&
-					registeredTextMessage.getMessage().getReciever() == message.getReciever()) {
-				textMessage = registeredTextMessage;
+		if(textMessageRegistry != null) {
+			for(TextMessage registeredTextMessage:textMessageRegistry.getTextMessages()) {
+				if(registeredTextMessage.getMessage().getSender().equals(message.getSender()) &&
+						registeredTextMessage.getMessage().getReciever().equals(message.getReciever())) {
+					textMessage = registeredTextMessage;
+				}
+		
 			}
 		}
 		return textMessage;
 	}
 	
 	private boolean analizeInapropiateContent(Message message) {
-		return false; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,
+		boolean inapropiate = false;
+		String[] words = message.getContent().split(" ");
+		for(String word:words) {
+			if(word.equalsIgnoreCase(PICHA) || word.equalsIgnoreCase(MIERDA) || word.equalsIgnoreCase(PUTA) ||
+					word.equalsIgnoreCase(HIJUEPUTA) || word.equalsIgnoreCase(CAREPICHA) ||	word.equalsIgnoreCase(CAGO) ||
+					word.equalsIgnoreCase(CAGAR) || word.equalsIgnoreCase(FUCK) || word.equalsIgnoreCase(BITCH) ||
+					word.equalsIgnoreCase(DICK) || word.equalsIgnoreCase(CUNT) || word.equalsIgnoreCase(SHIT)) {
+				inapropiate = true;
+				break;
+			}
+		}
+		return inapropiate; 
 	}
 	
 	private void banUser(String userMacAddress) {
@@ -124,7 +143,7 @@ public class Logic implements Constants {
 	
 	private void addToTextMessageRegistry(Message message) {
 		TextMessageRegistry textMessageRegistry = databaseManager.readTextMessageRegistry();
-		textMessageRegistry.getTextMessages().add(new TextMessage(message));
+		textMessageRegistry.addTextMessage(new TextMessage(message));
 		databaseManager.writeTextMessageRegistry(textMessageRegistry);
 	}
 	
@@ -132,6 +151,22 @@ public class Logic implements Constants {
 		MessageRegistry messageRegistry = databaseManager.readMessageRegistry();
 		messageRegistry.getMessages().add(message);
 		databaseManager.writeMessageRegistry(messageRegistry);
+	}
+	
+	/** metodo utilizado para buscar los mensajes que contengan una palabara
+	 * 
+	 * @param word
+	 * @return 
+	 */
+	public MessageRegistry searchTextMessageByWord(String word) {
+		MessageRegistry messageRegistry = new MessageRegistry();
+		TextMessageRegistry textMessageRegistry = databaseManager.readTextMessageRegistry();
+		for(TextMessage textMessage : textMessageRegistry.getTextMessages()) {
+			if (textMessage.getbTree().search(word) != null) {
+				messageRegistry.getMessages().add(textMessage.getMessage());
+			}
+		}
+		return messageRegistry;
 	}
 	
 }

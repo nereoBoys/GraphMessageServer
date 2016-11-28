@@ -1,7 +1,10 @@
 package graphmessage.pojos;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import graphmessage.datastructures.btree.BTree;
 
+@XmlRootElement
 public class TextMessage {
 	
 	private Message message;
@@ -11,7 +14,7 @@ public class TextMessage {
 	
 	public TextMessage(Message message) {
 		this.message = message;
-		createBTree(message);
+		this.bTree = createBTree(message);
 	}
 	
 	private BTree<String> createBTree(Message message) {
@@ -26,12 +29,15 @@ public class TextMessage {
 	public Message getMessage() {
 		return message;
 	}
+	
 	public void setMessage(Message message) {
 		this.message = message;
 	}
+
 	public BTree<String> getbTree() {
 		return bTree;
 	}
+
 	public void setbTree(BTree<String> bTree) {
 		this.bTree = bTree;
 	}

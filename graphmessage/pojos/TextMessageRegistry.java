@@ -16,5 +16,9 @@ public class TextMessageRegistry {
 	public void setTextMessages(ArrayList<TextMessage> textMessages) {
 		this.textMessages = textMessages;
 	}
+	
+	public void addTextMessage(TextMessage textMessage) {
+		textMessages.add(textMessage);
+	}
 
 }

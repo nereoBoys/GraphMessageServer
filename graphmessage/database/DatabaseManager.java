@@ -179,24 +179,14 @@ public class DatabaseManager implements Constants {
 		}
 	}
 	
+	private TextMessageRegistry textMessageRegistry = new TextMessageRegistry();
+	
 	/**Metodo usado para leer el archivo xml que contiene el registro de los 
 	 * mensajes registrados
 	 * 
 	 * @return TextMessageRegistry
 	 */
 	public TextMessageRegistry readTextMessageRegistry() {
-		
-		TextMessageRegistry textMessageRegistry = null;
-		
-		try {
-			File file = new File(TEXT_MESSAGE_REGISTRY_PATH);
-			JAXBContext jaxbContext = JAXBContext.newInstance(TextMessageRegistry.class);
-
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			textMessageRegistry = (TextMessageRegistry) jaxbUnmarshaller.unmarshal(file);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
 		return textMessageRegistry;
 	}
 	
@@ -206,18 +196,7 @@ public class DatabaseManager implements Constants {
 	 * @param textMessageRegistry
 	 */
 	public void writeTextMessageRegistry(TextMessageRegistry textMessageRegistry) {
-		try {
-			File file = new File(TEXT_MESSAGE_REGISTRY_PATH);
-			JAXBContext jaxbContext = JAXBContext.newInstance(TextMessageRegistry.class);
-			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-			jaxbMarshaller.marshal(textMessageRegistry, file);
-			jaxbMarshaller.marshal(textMessageRegistry, System.out);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
+		this.textMessageRegistry = textMessageRegistry;
 	}
 
 }

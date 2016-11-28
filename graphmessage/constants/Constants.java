@@ -14,4 +14,19 @@ public interface Constants {
 	public static final String USER_REGISTRY_PATH = "/home/jeanpaul/Workspace/GraphMessageServer/src/graphmessage/xml/User Registry.xml";
 	public static final String MESSAGE_REGISTRY_PATH = "/home/jeanpaul/Workspace/GraphMessageServer/src/graphmessage/xml/Message Registry.xml";
 	public static final String TEXT_MESSAGE_REGISTRY_PATH = "/home/jeanpaul/Workspace/GraphMessageServer/src/graphmessage/xml/Text Message Registry.xml";
+	
+	public static final String PICHA = "picha";
+	public static final String MIERDA = "mierda";
+	public static final String PUTA = "puta";
+	public static final String HIJUEPUTA = "hijueputa";
+	public static final String CAREPICHA = "carepicha";
+	public static final String CAGO = "cago";
+	public static final String CAGAR = "cagar";
+
+	public static final String FUCK = "fuck";
+	public static final String BITCH = "bitch";
+	public static final String SHIT = "shit";
+	public static final String DICK = "dick";
+	public static final String CUNT = "cunt";
+
 }
